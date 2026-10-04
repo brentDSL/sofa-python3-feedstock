@@ -80,6 +80,16 @@ tests:
         - SofaRuntime
         - SofaTypes
         - SofaExporter
+  # Imports alone do not show the bindings work: step a small scene, driving it
+  # from a Python Controller and reading state back through numpy.
+  - script:
+      - python run_test_sofapython3.py
+    files:
+      recipe:
+        - run_test_sofapython3.py
+    requirements:
+      run:
+        - numpy
   - script:
       - cmake-package-check SofaPython3
     requirements:
