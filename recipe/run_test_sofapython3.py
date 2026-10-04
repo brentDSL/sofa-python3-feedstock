@@ -65,6 +65,15 @@ def main():
     # backward Euler overshoots the analytic fall slightly; 5% covers it
     assert abs(p[1] - 0.5 * G * t * t) < 0.05 * abs(0.5 * G * t * t) + abs(G) * DT * t, p
     assert p[0] > 0.4, "velocity written from Python did not reach the solver"
+
+    # A call that matches no overload must raise TypeError. Built against
+    # pybind11 3.1.0 this segfaults instead (pybind/pybind11#6183).
+    try:
+        body.addObject(1.0)
+    except TypeError:
+        pass
+    else:
+        raise AssertionError("addObject(1.0) did not raise TypeError")
     print("OK")
 
 

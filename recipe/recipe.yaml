@@ -61,7 +61,10 @@ requirements:
     - eigen
     - python
     - numpy
-    - pybind11
+    # pybind11 3.1.0 makes any keep_alive<0, N> binding segfault when called
+    # with arguments that match no overload (e.g. Node.addObject(1.0)).
+    # Fixed by pybind/pybind11#6183; lift this once a fixed release is out.
+    - pybind11 <3.1
   run:
     - python
     - pybind11
