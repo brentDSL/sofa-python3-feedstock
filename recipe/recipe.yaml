@@ -30,6 +30,10 @@ build:
     # Fix here remove the duplicate one in Library/{lib/bin} and patch its CMake config files
     # to points the one inside site-packages instead. But this should be fixed upstream.
     # See https://github.com/sofa-framework/conda-ci/issues/27
+    # An explicit include keeps the package from coming out empty on linux/osx,
+    # where the win-only exclude list below renders to nothing.
+    include:
+      - "**"
     exclude:
       - if: win
         then:
